@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 
 public class SupplierModel {
 
-    public static void saveData(SupplierDTO supplierDTO){
+    public static int saveData(SupplierDTO supplierDTO){
         try{
             //01 create sql
             String sql = "insert into supplier values(?,?,?,?)";
@@ -28,14 +28,11 @@ public class SupplierModel {
 
             //05 execute the sql
             int result = preparedStatement.executeUpdate();
-            if(result > 0) {
-                System.out.println("Added Successfully");
-            }else{
-                System.out.println("Not Added Successfully");
-            }
+            return result;
 
         }catch(Exception e){
             System.out.println("Error: " + e);
         }
+        return 0;
     }
 }

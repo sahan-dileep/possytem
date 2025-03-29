@@ -42,7 +42,13 @@ public class SupplierController {
 
         SupplierDTO supplierDTO  = new SupplierDTO(id, name, address, tel);
 
-        SupplierModel.saveData(supplierDTO);
+        int result = SupplierModel.saveData(supplierDTO);
+
+        if(result > 0) {
+            System.out.println("Added Successfully");
+        }else{
+            System.out.println("Not Added Successfully");
+        }
 
     }
 
