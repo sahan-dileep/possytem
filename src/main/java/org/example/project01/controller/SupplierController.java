@@ -1,4 +1,4 @@
-package org.example.project01;
+package org.example.project01.controller;
 
 
 import javafx.collections.FXCollections;
@@ -6,6 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.example.project01.dto.SupplierDTO;
+import org.example.project01.model.SupplierModel;
+import org.example.project01.tm.Supplier;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -37,34 +40,10 @@ public class SupplierController {
         String address = txt_address.getText();
         int tel = Integer.parseInt(txt_tel.getText());
 
-        try{
-            //01 create sql
-            String sql = "insert into supplier values(?,?,?,?)";
+        SupplierDTO supplierDTO  = new SupplierDTO(id, name, address, tel);
 
-            //02 run the driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        SupplierModel.saveData(supplierDTO);
 
-            //03 create a connection
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pos_system","root","Sdg@0452265846");
-
-            //04 create statement
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, id);
-            preparedStatement.setString(2, name);
-            preparedStatement.setString(3, address);
-            preparedStatement.setInt(4, tel);
-
-            //05 execute the sql
-            int result = preparedStatement.executeUpdate();
-            if(result > 0) {
-                System.out.println("Added Successfully");
-            }else{
-                System.out.println("Not Added Successfully");
-            }
-
-        }catch(Exception e){
-            System.out.println("Error: " + e);
-        }
     }
 
     public void btn_Update(ActionEvent actionEvent) {
