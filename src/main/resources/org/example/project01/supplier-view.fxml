@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="578.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.project01.controller.SupplierController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.project01.controller.SupplierController">
    <children>
       <TextField fx:id="txt_id" layoutX="232.0" layoutY="75.0" />
       <TextField fx:id="txt_name" layoutX="232.0" layoutY="111.0" />
@@ -18,9 +18,9 @@
       <Label layoutX="44.0" layoutY="115.0" text="Supplier Name" />
       <Label layoutX="44.0" layoutY="149.0" text="Address" />
       <Label layoutX="44.0" layoutY="183.0" prefHeight="18.0" prefWidth="79.0" text="Tel No" />
-      <Label alignment="TOP_LEFT" layoutX="44.0" layoutY="34.0" prefHeight="18.0" prefWidth="214.0" text="Supplier Details" textFill="#f40000">
+      <Label alignment="CENTER" prefHeight="55.0" prefWidth="600.0" style="-fx-background-color: #102379;" text="Supplier Details" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="21.0" />
          </font>
       </Label>
       <Button layoutX="425.0" layoutY="75.0" mnemonicParsing="false" onAction="#btn_Add" prefHeight="26.0" prefWidth="55.0" text="Add" />

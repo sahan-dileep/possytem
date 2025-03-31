@@ -59,33 +59,15 @@ public class SupplierController {
         String address = txt_address.getText();
         int tel = Integer.parseInt(txt_tel.getText());
 
-        try{
-            //01 create sql
-            String sql = "update supplier set sname=?,address=?,tel=? where sid=?";
+        SupplierDTO supplierDTO  = new SupplierDTO(id, name, address, tel);
 
-            //02 run the driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        int result = SupplierModel.updateData(supplierDTO);
 
-            //03 create a connection
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pos_system","root","Sdg@0452265846");
-
-            //04 create statement
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, address);
-            preparedStatement.setInt(3, tel);
-            preparedStatement.setString(4, id);
-
-            //05 execute the sql
-            int result = preparedStatement.executeUpdate();
-            if(result > 0) {
-                System.out.println("Update Successfully");
-            }else{
-                System.out.println("Not updated Successfully");
-            }
-
-        }catch(Exception e){
-            System.out.println("Error: " + e);
+        if(result > 0) {
+            System.out.println("Update Successfully");
+            initialize();
+        }else{
+            System.out.println("Not Update Successfully");
         }
     }
 
@@ -93,62 +75,33 @@ public class SupplierController {
 
         String id = txt_id.getText();
 
-        try{
-            //01 create sql
-            String sql = "delete FROM supplier WHERE sid=?";
 
-            //02 run the driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        int result = SupplierModel.deleteData(id);
 
-            //03 create a connection
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pos_system","root","Sdg@0452265846");
-
-            //04 create statement
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, id);
-
-            //05 execute the sql
-            int result = preparedStatement.executeUpdate();
-            if(result > 0) {
-                System.out.println("Delete Successfully");
-            }else{
-                System.out.println("Not Delete Successfully");
-            }
-
-        }catch(Exception e){
-            System.out.println("Error: " + e);
+        if(result > 0) {
+            System.out.println("Delete Successfully");
+            initialize();
+        }else{
+            System.out.println("Not Delete Successfully");
         }
     }
 
-    public void btn_Search(ActionEvent actionEvent) {
+    public void btn_Search(ActionEvent actionEvent) throws SQLException {
         String id = txt_id.getText();
 
-        try{
-            //01 create sql
-            String sql = "select * from supplier where sid=?";
+        ResultSet result = SupplierModel.searchData(id);
 
-            //02 run the driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            //03 create a connection
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pos_system","root","Sdg@0452265846");
-
-            //04 create statement
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, id);
-
-            //05 execute the sql
-            ResultSet result = preparedStatement.executeQuery();
-            if (result.next()){
-                txt_name.setText(result.getString("sname"));
-                txt_address.setText(result.getString("address"));
-                txt_id.setText(result.getString("sid"));
-                txt_tel.setText(result.getString("tel"));
-            }
-
-        }catch(Exception e){
-            System.out.println("Error: " + e);
+        if(result.next()) {
+            txt_name.setText(result.getString("sname"));
+            txt_address.setText(result.getString("address"));
+            txt_id.setText(result.getString("sid"));
+            txt_tel.setText(result.getString("tel"));
+        }else{
+            System.out.println("Result Not Found");
         }
+
+
+
     }
 
     public ArrayList<Supplier> getAllSuplliers(){
