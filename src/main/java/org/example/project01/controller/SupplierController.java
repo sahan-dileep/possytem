@@ -13,6 +13,8 @@ import org.example.project01.tm.Supplier;
 import java.sql.*;
 import java.util.ArrayList;
 
+import static org.example.project01.model.SupplierModel.getAllSuplliers;
+
 public class SupplierController {
 
     public TextField txt_id;
@@ -104,36 +106,5 @@ public class SupplierController {
 
     }
 
-    public ArrayList<Supplier> getAllSuplliers(){
-        try{
-            //01 create sql
-            String sql = "select * from supplier";
 
-            //02 run the driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            //03 create a connection
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pos_system","root","Sdg@0452265846");
-
-            //04 create statement
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            //05 execute the sql
-            ResultSet result = preparedStatement.executeQuery();
-
-            ArrayList<Supplier> suppliers = new ArrayList<>();
-
-            while(result.next()){
-
-                suppliers.add(new Supplier(result.getString("sid"),result.getString("sname"),result.getString("address"),
-                        String.valueOf(result.getString("tel"))));
-            }
-
-            return suppliers;
-
-        }catch(Exception e){
-            System.out.println("Error: " + e);
-        }
-        return null;
-    }
 }
